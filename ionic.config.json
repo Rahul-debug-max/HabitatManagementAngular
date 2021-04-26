@@ -1,0 +1,7 @@
+{
+  "name": "HmApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

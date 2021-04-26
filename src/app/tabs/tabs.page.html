@@ -1,0 +1,51 @@
+<!-- <ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="triangle"></ion-icon>
+      <ion-label>Tab 1</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="ellipse"></ion-icon>
+      <ion-label>Tab 2</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="square"></ion-icon>
+      <ion-label>Tab 3</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Habitat Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container-fluid mb-2">
+    <div class="row">
+      <div class="col-2">
+        <label class="form-control border-0"> From Template</label>
+      </div>
+      <div class="col-4">
+        <ion-item *ngIf="forms.length >0">
+          <ion-select interface="popover" [value]="forms[0].value" (ionChange)="onSelectForm($event)" class="formFeedbackSelector">
+            <ion-select-option *ngFor="let item of forms" [value]="item?.value">
+              {{item.text}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="col-12">
+        <div class="dvFormFeedbackData" [innerHTML]="htmlTamplate">
+        </div>
+      </div>
+      <div class="col-12">
+        <button *ngIf="!!htmlTamplate" class="btn btn-primary mt-2 mb-2 float-right" (click)="SaveFormFeedabck()">Save</button>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<!-- First Container -->

@@ -1,0 +1,69 @@
+.modal {
+    position: absolute !important;
+    overflow: auto !important;
+}
+
+.formOuterStyle {
+    border: 1px solid;
+    padding: 5px 0px 0px 0px;
+}
+
+.fontBold {
+    font-weight: bold;
+}
+
+/*    .bgLightGray { 
+
+    background-color: lightgray; 
+
+}*/
+
+.conditionDigitalSignature canvas {
+    height: 97px !important;
+    background-color: white !important;
+}
+
+.tableCheckList td,
+.tableCheckList th {
+    border: 1px solid black;
+    padding: 3px 10px 3px 15px;
+}
+
+.dvCheckList table tr th:first-child,
+.dvCheckList table tr:first-child td,
+.dvCheckList table {
+    border: none !important;
+}
+
+.tableCheckList {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bgColorWhite {
+    background-color: white;
+}
+
+.sectionStyle {
+    outline: 1px dashed red !important;
+    outline-offset: -3px;
+    padding: 10px;
+}
+
+.sectionStyle:hover * {
+    cursor: move;
+}
+
+.mrgright {
+    margin-right: 2px;
+}
+
+.mrgleft {
+    margin-left: 2px;
+}
+
+.form-control[readonly] {
+    cursor: move;
+    background-color: #eee !important;
+    opacity: 1;
+}
