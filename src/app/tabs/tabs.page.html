@@ -20,7 +20,8 @@
 </ion-tabs> -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Habitat Management</ion-title>
+    <img src="../../assets/icon/rsk-logo.jpeg">
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -31,7 +32,8 @@
       </div>
       <div class="col-4">
         <ion-item *ngIf="forms.length >0">
-          <ion-select interface="popover" [value]="forms[0].value" (ionChange)="onSelectForm($event)" class="formFeedbackSelector">
+          <ion-select interface="popover" [value]="forms[0].value" (ionChange)="onSelectForm($event)"
+            class="formFeedbackSelector">
             <ion-select-option *ngFor="let item of forms" [value]="item?.value">
               {{item.text}}
             </ion-select-option>
@@ -43,7 +45,8 @@
         </div>
       </div>
       <div class="col-12">
-        <button *ngIf="!!htmlTamplate" class="btn btn-primary mt-2 mb-2 float-right" (click)="SaveFormFeedabck()">Save</button>
+        <button *ngIf="!!htmlTamplate" class="btn btn-primary mt-2 mb-2 float-right"
+          (click)="SaveFormFeedabck()">Save</button>
       </div>
     </div>
   </div>
