@@ -81,15 +81,10 @@ $(document).ready(function () {
     });
 
 
-
     $('.formFieldTypeCheckbox').find('input[type="checkbox"]').on('change', function () {
-
         var isChecked = $(this).is(":checked");
-
-        $(this).closest("div").find('input:checkbox').prop('checked', false);
-
+        $(this).closest("div").siblings().find('input:checkbox').prop('checked', false);
         $(this).prop("checked", isChecked);
-
     });
 
 });

@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,8 +24,6 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
-
 
 .modal {
     position: absolute !important;
@@ -95,4 +93,37 @@
     cursor: move;
     background-color: #eee !important;
     opacity: 1;
+}
+ion-select {
+    width: 100%;
+    justify-content: center;
+}
+
+.product-alert-css {
+    .alert-wrapper {
+        max-width: unset !important;
+        --min-width: 42% !important;
+        justify-content: center;
+        .alert-radio-label {
+            white-space: initial;
+        }
+        .alert-tappable {
+            height: 57px;
+            overflow: hidden;
+        }
+    }
+}
+.form-alert-css {
+    .alert-wrapper {
+        max-width: unset !important;
+        --min-width: 42% !important;
+        justify-content: center;
+        .alert-radio-label {
+            white-space: initial;
+        }
+        .alert-tappable {
+            height: 57px;
+            overflow: hidden;
+        }
+    }
 }

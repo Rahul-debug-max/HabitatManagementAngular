@@ -10,8 +10,13 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  getForms(): Observable<any> {
-    let apiName = 'form/GetForms';
+  getForms(projectID: any): Observable<any> {
+    let apiName = `form/GetForms/${projectID}`;
+    return this.http.get(AppConstant.API_URL + apiName);
+  }
+
+  getProjects(): Observable<any> {
+    let apiName = 'project/GetProject';
     return this.http.get(AppConstant.API_URL + apiName);
   }
 
@@ -33,10 +38,11 @@ export class CommonService {
     });
   }
 
-  onSaveFormData(resfromData: any): Observable<any> {
+  onSaveFormData(resfromData: any, projectID: any): Observable<any> {
     let apiName = `form/SaveFormData`;
     const formData = new FormData();
     formData.append('data', JSON.stringify(resfromData));
+    formData.append('projectID', projectID);
     return this.http.post(AppConstant.API_URL + apiName, formData);
   }
 

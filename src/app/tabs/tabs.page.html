@@ -1,54 +1,60 @@
-<!-- <ion-tabs>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-
-</ion-tabs> -->
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <img src="../../assets/icon/rsk-logo.jpeg">
     <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div class="container-fluid mb-2">
-    <div class="row">
-      <div class="col-2">
-        <label class="form-control border-0"> From Template</label>
-      </div>
-      <div class="col-4">
-        <ion-item *ngIf="forms.length >0">
-          <ion-select interface="popover" [value]="forms[0].value" (ionChange)="onSelectForm($event)"
-            class="formFeedbackSelector">
-            <ion-select-option *ngFor="let item of forms" [value]="item?.value">
-              {{item.text}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </div>
-      <div class="col-12">
-        <div class="dvFormFeedbackData" [innerHTML]="htmlTamplate">
+<ion-content [scrollEvents]="true">
+  <ion-card>
+    <div class="container-fluid mb-2">
+      <div class="row">
+
+        <div class="col-2 p-2">
+          <label class="form-control border-0"> Project</label>
+        </div>
+        <div class="col-6 mt-1">
+          <ion-item *ngIf="projects.length >0" lines="none">
+            <ion-select [interfaceOptions]="productOptions" [value]="projects[0].value"
+              (ionChange)="onSelectProject($event)" class="projectFeedbackSelector">
+              <ion-select-option class="ion-text-wrap" *ngFor="let item of projects" [value]="item?.value">
+                {{item.text}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
         </div>
       </div>
-      <div class="col-12">
-        <button *ngIf="!!htmlTamplate" class="btn btn-primary mt-2 mb-2 float-right"
-          (click)="SaveFormFeedabck()">Save</button>
+      <div class="row" *ngIf="forms.length >0">
+        <div class="col-2 p-2">
+          <label class="form-control border-0"> Form Template</label>
+        </div>
+        <div class="col-6 mt-1">
+          <ion-item lines="none">
+            <ion-select [interfaceOptions]="formOptions" [(ngModel)]="formInputValue" (ionChange)="onSelectForm($event)"
+              class="formFeedbackSelector">
+              <ion-select-option class="ion-text-wrap" *ngFor="let item of forms" [value]="item?.value">
+                {{item.text}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div class="col-12">
+          <!-- <ul style="color:red; display:none;" class="formErrorMessage mb-2 pl-3">
+            <li>
+              <span class="text-danger field-validation-error" data-valmsg-for="Form" data-valmsg-replace="true">
+                <span for="Form" generated="true" class="">Fill the form</span>
+              </span>
+            </li>
+          </ul> -->
+          <div class="dvFormFeedbackData" [innerHTML]="htmlTamplate">
+          </div>
+        </div>
+        <div class="col-12">
+          <ion-button *ngIf="!!htmlTamplate" class="mt-2 mb-2 float-right" (click)="SaveFormFeedabck()">
+            Save
+          </ion-button>
+        </div>
       </div>
     </div>
-  </div>
+  </ion-card>
 </ion-content>
 <!-- First Container -->
