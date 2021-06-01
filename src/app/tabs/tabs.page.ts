@@ -37,6 +37,7 @@ export class TabsPage implements OnInit {
   }
 
   public loadScript(url) {
+    //https://stackoverflow.com/questions/44204417/dynamically-load-external-javascript-file-from-angular-component
     console.log("preparing to load...");
     let node = document.createElement("script");
     node.src = `assets/${url}`;
@@ -136,19 +137,27 @@ export class TabsPage implements OnInit {
     });
   }
 
+  showFormFillAlert() {
+    this.appShared.alertCtrl.create({
+      header: 'Error',
+      subHeader: 'Fill the form.',
+      buttons: ['OK']
+    }).then((alert) => {
+      alert.present();
+      alert.onDidDismiss().then(() => {
+        this.ScrollToTop();
+      });
+    });
+  }
+
   SaveFormFeedabck() {
     let serverRequest = addFromData();
-    if (serverRequest == false) {
-      this.appShared.alertCtrl.create({
-        header: 'Error',
-        subHeader: 'Fill the form.',
-        buttons: ['OK']
-      }).then((alert) => {
-        alert.present();
-        alert.onDidDismiss().then(() => {
-          this.ScrollToTop();
-        });
-      });
+    if (serverRequest['action'] == false) {
+      if (serverRequest['error'] == 'requiredError') {
+        this.ScrollToTop();
+      } else {
+        this.showFormFillAlert();
+      }
     } else {
       this.appShared.showLoading();
       this.commonService.onSaveFormData(serverRequest, this.productID).subscribe((res) => {

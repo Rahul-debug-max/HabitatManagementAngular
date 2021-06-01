@@ -38,6 +38,7 @@ export function removejscssfile(filename, filetype) {
 }
 
 export function addFromData() {
+  var isErrorFound = false;
   var isFormFilled = false;
   var obj: any;
   var data = [];
@@ -65,6 +66,12 @@ export function addFromData() {
 
     var fieldType = obj.attr('field-Type');
 
+
+    //
+    var fieldMandatory = obj.attr('data-field-mandatory');
+    obj.find('.text-danger').removeClass('d-none').addClass('d-none');
+    //
+
     if (fieldType == FormFieldType.CheckList) {
 
       $(obj).find('.checkListTR').each((inx, ele) => {
@@ -74,6 +81,8 @@ export function addFromData() {
         var yesCheckBox = $(ele).find('input')[0];
 
         var noCheckBox = $(ele).find('input')[1];
+
+        fieldMandatory = $(ele).find('td').attr('data-field-mandatory');
 
         field = $(yesCheckBox).attr('name');
 
@@ -87,6 +96,12 @@ export function addFromData() {
 
           checked = 0;
 
+        }
+
+
+        if (checked === "" && fieldMandatory == "True") {
+          $(ele).find('td').find('.text-danger').removeClass('d-none');
+          isErrorFound = true;
         }
 
         data.push({
@@ -161,13 +176,20 @@ export function addFromData() {
 
     if (fieldType != FormFieldType.CheckList) {
 
+      fieldValue = (fieldValue != null && fieldValue != undefined && !($.isNumeric(fieldValue))) ? fieldValue.trim() : fieldValue;
+      if (((fieldValue === "" && fieldType != FormFieldType.Signature) || (fieldType == FormFieldType.Signature && digitalSignatureImage64BitString === "")) && fieldMandatory == "True") {
+        $(obj).find('.text-danger').removeClass('d-none').addClass('d-block');
+        isErrorFound = true;
+      }
+
+
       data.push({
 
         FormID: $('.formFeedbackSelector').val(),
 
         Field: field,
 
-        FieldValue: (fieldValue != null && fieldValue != undefined && !($.isNumeric(fieldValue))) ? fieldValue.trim() : fieldValue,
+        FieldValue: fieldValue,
 
         DigitalSignatureImage64BitString: digitalSignatureImage64BitString,
 
@@ -188,19 +210,23 @@ export function addFromData() {
       }
     });
   }
-  if (!isFormFilled && $(".formErrorMessage").length > 0) {
-    $(".formErrorMessage").show();
-    $('.modal').animate({ scrollTop: 0 }, 0);
-  }
-  else {
-    $(".formErrorMessage").hide();
-  }
-  // Validation
 
-  if (isFormFilled) {
+
+
+  // if (!isFormFilled && $(".formErrorMessage").length > 0) {
+  //   $(".formErrorMessage").show();
+  //   $('.modal').animate({ scrollTop: 0 }, 0);
+  // }
+  // else {
+  //   $(".formErrorMessage").hide();
+  // }
+  // Validation
+  if (isErrorFound) {
+    return { action: false, error: 'requiredError' };
+  } else if (isFormFilled) {
     return data;
   } else {
-    return false;
+    return { action: false, error: 'fillError' };
   }
 
   // var ajx = $.ajax({
@@ -235,6 +261,7 @@ export function addFromData() {
 }
 
 export function setFromData() {
+
   var obj: any;
   var data = [];
   var FormFieldType = {

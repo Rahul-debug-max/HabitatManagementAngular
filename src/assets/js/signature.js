@@ -34,6 +34,10 @@ $(document).ready(function () {
 
             $digSigdiv.jSignature("disable");
 
+            $(singnatureDv).bind('change', function (e) {
+                $(this).parents("div[class*='dvSignatureDataType']").find("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+            });
+
         }
 
     });
@@ -74,10 +78,9 @@ $(document).ready(function () {
 
     $('.dvCheckList').find('input[type="checkbox"]').on('change', function () {
         var isChecked = $(this).is(":checked");
-
         $(this).closest("tr").find('input:checkbox').prop('checked', false);
-
         $(this).prop("checked", isChecked);
+        $(this).closest("tr").find("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
     });
 
 
@@ -85,6 +88,25 @@ $(document).ready(function () {
         var isChecked = $(this).is(":checked");
         $(this).closest("div").siblings().find('input:checkbox').prop('checked', false);
         $(this).prop("checked", isChecked);
+        $(this).parent().siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+    });
+
+    $('#dvFormFeedback').find('input[type="text"],input[type="radio"],input[type="checkbox"],textarea').not('input[readonly="readonly"]').not('input[disabled="disabled"]').change(function () {
+        $(this).siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+    });
+
+
+
+    $("div[name*='datetimepicker']").on('dp.change', function (e) {
+        $(this).parent().siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+        $(this).siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+    });
+
+
+
+    $("div[name*='timepicker']").on('dp.change', function (e) {
+        $(this).parent().siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
+        $(this).siblings("span[class*='text-danger']").removeClass('d-none d-block').addClass('d-none');
     });
 
 });
